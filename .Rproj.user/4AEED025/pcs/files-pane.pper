@@ -1,0 +1,9 @@
+{
+    "path" : "E://tf-idf",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
