@@ -41,7 +41,8 @@ book_words <- myDataset %>%
         unnest_tokens(word, text,to_lower = TRUE) %>%
         count(file,word, sort = TRUE) %>% ungroup()
 
-total_words <- book_words %>% group_by(word) %>% summarize(total = sum(n))
+total_words <- book_words %>% group_by(file,word) %>% summarize(total = sum(n))
+total_files <- total_words %>% group_by(word,file) %>% summarize(n = count(n))
 book_words <- left_join(book_words, total_words, by = "word")
 head(book_words)
 
