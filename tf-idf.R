@@ -39,12 +39,17 @@ myDataset <- data.frame(lapply(myDataset,as.character), stringsAsFactors = FALSE
 colnames(myDataset) <- c("file","class","text")
 book_words <- myDataset %>%
         unnest_tokens(word, text,to_lower = TRUE) %>%
-        count(file,word, sort = TRUE) %>% ungroup()
+        count(file,word, sort = TRUE) %>% ungroup() %>% as.data.frame()
 
-total_words <- book_words %>% group_by(file,word) %>% summarize(total = sum(n))
-total_files <- total_words %>% group_by(word,file) %>% summarize(n = count(n))
+
+book_words <- book_words[order(book_words$file),]
+
+names(book_words) <- c("file","word","f")
+
+total_words <- book_words %>% group_by(word) %>% summarize(total = sum(f))
 book_words <- left_join(book_words, total_words, by = "word")
 head(book_words)
+
 
 # Create matrix with TF-IDF
 book_words <- book_words %>% bind_tf_idf(term = word, document = file, n = n) 
@@ -56,3 +61,6 @@ setkey(book_words,file,word,class)
 
 write.csv(book_words,file = "tf-idf.csv")
 book_words
+
+
+log(4/2)
