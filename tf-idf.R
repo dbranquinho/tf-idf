@@ -55,8 +55,9 @@ conta <- function(x) {
 
 bind_tfidf <- function(files,f,n) {
         nfiles <- length(unique(book_words$file))
+        nfiles <- rep(nfiles,length(book_words$file))
         tf <- 1+log2(f)
-        idf <- log2(4/n)
+        idf <- log2(nfiles/n)
         tf_idf <- tf * idf
         book_words$df <- tf
         book_words$idf <- idf
