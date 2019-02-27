@@ -3,7 +3,9 @@ title: "TF-IDF by Baeza-Yates"
 subtitle: "Page 73"
 author: "Delermando Branquinho Filho"
 date: "20 de fevereiro de 2019"
-output: html_document
+output:
+  md_document:
+    variant: markdown_github
 ---
 
 ```{r setup, include=FALSE}
