@@ -78,3 +78,4 @@ head(book_words)
 book_words$tf_idf <- bind_tfidf(book_words$file,book_words$f,book_words$n)
 print(book_words)
 
+
